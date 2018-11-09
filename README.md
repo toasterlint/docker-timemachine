@@ -1,18 +1,7 @@
 # docker-timemachine
 A docker container to compile the lastest version of Netatalk in order to run a Time Machine server.
 
-## Running on ARM / RPi
-If you want to use this on an ARM-Device (like the Raspberry Pi), you have two options:
-
-- Get the precompiled image (latest compilation on 29-03-2018):
-    ```
-    $ docker run -h timemachine --name timemachine --restart=unless-stopped -d -v /external_volume:/timemachine -it -p 548:548 -p 636:636 odarriba/timemachine-rpi
-    ```
-- Build the image directly on your device:
-    ```
-    $ docker build -t timemachine-rpi:latest -f Dockerfile.rpi .
-    $ docker run -h timemachine --name timemachine --restart=unless-stopped -d -v /external_volume:/timemachine -it -p 548:548 -p 636:636 timemachine-rpi
-    ```
+This was originally taken from odarriba, I've just cloned it and am setting up a hook to trigger rebuilds at least once a day to ensure the Alpine image being used is the most current and patched version.  I've also removed the Rasp Pi references as I personally don't need to run on a Pi.
 
 ## Installation
 
@@ -21,7 +10,7 @@ If you want to use this on an ARM-Device (like the Raspberry Pi), you have two o
 To download the docker container and execute it, simply run:
 
 ```
-$ docker run -h timemachine --name timemachine --restart=unless-stopped -d -v /external_volume:/timemachine -it -p 548:548 -p 636:636 --ulimit nofile=65536:65536 odarriba/timemachine
+$ docker run -h timemachine --name timemachine --restart=unless-stopped -d -v /external_volume:/timemachine -it -p 548:548 -p 636:636 --ulimit nofile=65536:65536 toasterlint/timemachine
 ```
 
 Replace `external_volume` with a local path where you want to store your data.
